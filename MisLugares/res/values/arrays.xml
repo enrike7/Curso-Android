@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="tiposOrden"> 
+		<item>@string/pref_array1_alfa</item> 
+		<item>@string/pref_array1_fecha</item> 
+		<item>@string/pref_array1_tipo</item>
+	</string-array>
+	<string-array name="tiposOrdenValores"> 
+		<item>0</item> 
+		<item>1</item> 
+		<item>2</item>
+	</string-array>
+	<string-array name="tiposNotificaciones"> 
+		<item>@string/pref_array2_new_lugar</item> 
+		<item>@string/pref_array2_cerca</item> 
+		<item>@string/pref_array2_valorado</item>
+	</string-array>
+	<string-array name="tiposNotificacionesValores"> 
+		<item>0</item> 
+		<item>1</item> 
+		<item>2</item>
+	</string-array>
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<!-- <string name=""></string> -->
+	
+    <!-- MENU OPCIONES -->
+    <string name="menu_configuracion">Configuración</string>
+    <string name="menu_acercaDe">Acerca de…</string>
+    <string name="menu_buscar">Buscar</string>
+    <string name="menu_preferencias">Preferencias</string>
+    <string name="menu_ultimo">Último Leído</string>
+    
+    <!-- PANTALLA PRINCIPAL -->
+    <string name="vacio">No hay Lugares</string>
+    
+    <string name="menu_1">Mostrar Lugares</string>
+    <string name="menu_2">Preferencias</string>
+    <string name="menu_3">Acerca de</string>
+    <string name="menu_4">Salir</string>
+    
+	<!-- PREFERENCIAS -->
+		<!-- CATEGORIA PRINCIPAL -->
+		<string name="pref_env_notif">Mandar notificaciones</string>
+			<string name="pref_env_notif_summary">Notificar si estamos cerca de un lugar</string>
+		<string name="pref_dist_notif">Distancia para notificar</string>
+			<string name="pref_dist_notif_summary">Distancia mínima (km) para notificar</string>
+		<string name="pref_orden">Criterio de ordenación</string>
+			<string name="pref_orden_summary">Que lugares quieres que aparezcan antes</string>
+		
+		<!-- CATEGORIA NOTIFICACIONES DE CORREO -->	
+		<string name="pref_categoria_notif_email">Notificaiones por correo</string>
+		<string name="pref_notif_email">Recibir correos</string>
+			<string name="pref_notif_email_summary">Recibir correos con información sobre lugares</string>
+		<string name="pref_dir_email">Dirección de correo</string>
+			<string name="pref_dir_email_summary">Cuenta donde se mandarán las notificaciones</string>
+		<string name="pref_tipo_notif">Tipos de notificaciones</string>
+			<string name="pref_tipo_notif_summary">Que tipos de correos quieres recibir</string>
+			
+			
+			<!-- ARRAY DE PREFRERENCIAS -->
+			<string name="pref_array1_alfa">Alfabético</string>
+			<string name="pref_array1_fecha">Fecha</string>
+			<string name="pref_array1_tipo">Tipo</string>
+			
+			<string name="pref_array2_new_lugar">Nuevo lugar</string>
+			<string name="pref_array2_cerca">Cerca de mí</string>
+			<string name="pref_array2_valorado">Mejor valorados</string>
+	    
+    <!-- PANTALLA DE EDICION LUGAR Y VISTA DEL LUGAR-->
+    <string name="name">Nombre:</string>
+    	<string name="box_name">Algo que identifique el lugar</string>
+    <string name="type">Tipo:</string>
+    	<string name="box_type">Tipo del lugar</string>
+    <string name="addr">Dirección:</string>
+    	<string name="box_addr">Dirección del lugar</string>
+    <string name="tlf">Teléfono:</string>
+    	<string name="box_tlf">Teléfono para contactar</string>
+    <string name="url">Url:</string>
+    	<string name="box_url">Página web</string>
+    <string name="coment">Comentario:</string>
+    	<string name="box_coment">Introduce tus notas</string>
+    	
+    <string name="box_fecha">Fecha del lugar</string>
+    <string name="box_hora">Hora del lugar</string>
+    
+	<string name="des_tipo">Logo del tipo</string>
+	<string name="des_addr">Logo de la dirección</string>
+	<string name="des_tlf">Logo del teléfono</string>
+	<string name="des_url">Logo de la página web</string>
+	<string name="des_coment">Logo del comentario</string>
+    <string name="des_fecha">Logo de la fecha</string>
+    <string name="des_hora">Logo de la hora</string>
+    <string name="des_valoracion">Logo de la valoracion</string>
+    <string name="des_foto">Fotografía</string>
+    <string name="des_camara">Logo de la cámara</string>
+    <string name="des_galeria">Logo de la galería</string>
+
+    <!-- PANTALLA ACERCA DE -->	
+    <string name="acercadeText">Este programa ha sido desarrollado como ejemplo en el curso de Android para demostrar cómo se pueden lanzar nuevas actividades desde la actividad principal.</string>	
+    
+	<!-- TITULOS DE ACTIVIDADES -->
+	<string name="app_name">My Places</string>
+	<string name="title_activity_edicion_lugar">Editar Lugar</string>
+	<string name="title_activity_preferencias">Preferencias</string>
+	<string name="title_activity_acercade">Acerca de…</string>
+	<string name="title_activity_vista_lugar">Vista Lugar</string>
+</resources>

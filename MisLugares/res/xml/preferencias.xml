@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:key="preferencias_principal" > 
+	
+	<CheckBoxPreference
+	    android:key="notificaciones" 
+	    android:title="@string/pref_env_notif" 
+	    android:summary="@string/pref_env_notif_summary"/>
+	<EditTextPreference 
+	    android:key="distancia"
+	    android:title="@string/pref_dist_notif"
+	    android:summary="@string/pref_dist_notif_summary"
+	    android:defaultValue="3"
+	    android:inputType="number" />
+	<ListPreference
+	    android:key="orden"
+	    android:title="@string/pref_orden"
+	    android:summary="@string/pref_orden_summary"
+	    android:entries="@array/tiposOrden"
+	    android:entryValues="@array/tiposOrdenValores"
+	    android:defaultValue="1"/>
+	 
+	<PreferenceCategory
+    	android:title="@string/pref_categoria_notif_email" >
+    	
+	    <CheckBoxPreference
+		    android:key="notif_email" 
+		    android:title="@string/pref_notif_email" 
+		    android:summary="@string/pref_notif_email_summary"/>
+		<EditTextPreference 
+		    android:key="dir_email"
+		    android:title="@string/pref_dir_email"
+		    android:summary="@string/pref_dir_email_summary"
+		    android:defaultValue=""
+		    android:inputType="textEmailAddress" />
+		<ListPreference
+		    android:key="tipo_notif"
+		    android:title="@string/pref_tipo_notif"
+		    android:summary="@string/pref_tipo_notif_summary"
+		    android:entries="@array/tiposNotificaciones"
+		    android:entryValues="@array/tiposNotificacionesValores"
+		    android:defaultValue="1"/>	
+	    
+	</PreferenceCategory>
+	
+</PreferenceScreen>
