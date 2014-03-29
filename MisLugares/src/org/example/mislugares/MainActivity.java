@@ -150,7 +150,7 @@ public class MainActivity extends ListActivity {
 	protected void onStop() {
 	   super.onStop();
 	   Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
-	   mp.stop();
+	   mp.pause();
 	}
 	 
 	@Override
@@ -163,7 +163,8 @@ public class MainActivity extends ListActivity {
 	@Override
 	protected void onDestroy() {
 	   super.onDestroy();
-	   Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();     
+	   Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
+	   mp.stop();
 	}
 }
 
