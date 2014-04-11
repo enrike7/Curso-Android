@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lugares {
-
-	public static final String TAG = null;
+	static final String TAG = "MyActivity";
 	protected static ArrayList<Lugar> vectorLugares = ejemploLugares();
 	protected static GeoPunto posicionActual = new GeoPunto(0,0);
 
@@ -39,7 +38,7 @@ public class Lugares {
 		ArrayList<Lugar> lugares = new ArrayList<Lugar>();
 		
 		lugares.add(new Lugar("Escuela Politécnica Superior de Gandía",
-		"C/ Paranimf, 1 46730 Gandia (SPAIN)", 0.0, 0.0,
+		"C/ Paranimf, 1 46730 Gandia (SPAIN)", -0.166093, 38.995656,
 		TipoLugar.EDUCACION, 962849300, "http://www.epsg.upv.es",
 		"Uno de los mejores lugares para formarse.", 3));
 		

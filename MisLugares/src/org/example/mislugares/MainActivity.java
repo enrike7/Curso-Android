@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -23,7 +22,7 @@ public class MainActivity extends ListActivity implements LocationListener {
 	public BaseAdapter adaptador;
 	private final static int RESULTADO_LIST = 1;
 	private static final long DOS_MINUTOS = 2 * 60 * 1000;
-	private MediaPlayer mp;
+	//private MediaPlayer mp;
 	private LocationManager manejador;
 	private Location mejorLocaliz;
 	
@@ -34,8 +33,8 @@ public class MainActivity extends ListActivity implements LocationListener {
 		setContentView(R.layout.activity_main);
 		adaptador = new AdaptadorLugares(this);
 		setListAdapter(adaptador);
-		mp = MediaPlayer.create(this, R.raw.audio);
-		mp.start();
+		//mp = MediaPlayer.create(this, R.raw.audio);
+		//mp.start();
 		
 		manejador = (LocationManager) getSystemService(LOCATION_SERVICE);
 		if(manejador.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -50,19 +49,19 @@ public class MainActivity extends ListActivity implements LocationListener {
 	@Override
 	 protected void onSaveInstanceState(Bundle estadoGuardado){
 		super.onSaveInstanceState(estadoGuardado);
-		if (mp != null) {
+		/*if (mp != null) {
 			int pos = mp.getCurrentPosition();
 			estadoGuardado.putInt("posicion", pos);   
-		}
+		}*/
 	 }
 	 
 	 @Override
 	 protected void onRestoreInstanceState(Bundle estadoGuardado){
 		 super.onRestoreInstanceState(estadoGuardado);
-		 if (estadoGuardado != null && mp != null) {
+		 /*if (estadoGuardado != null && mp != null) {
 			 int pos = estadoGuardado.getInt("posicion");
 			 mp.seekTo(pos);
-		 }
+		 }*/
 	 }
 	
 	@Override
@@ -122,6 +121,10 @@ public class MainActivity extends ListActivity implements LocationListener {
 			case R.id.config:
 				lanzarPreferencias(null);
 				break;
+			case R.id.menu_mapa:
+				Intent i = new Intent(this, Mapa.class);
+				startActivity(i);
+				break;
 			default:
 				
 		}
@@ -163,7 +166,7 @@ public class MainActivity extends ListActivity implements LocationListener {
 	protected void onResume() {
 	   super.onResume();
 	   activarProveedores();
-	   mp.start();
+	   //mp.start();
 	}
 	 
 	@Override
@@ -175,19 +178,19 @@ public class MainActivity extends ListActivity implements LocationListener {
 	@Override
 	protected void onStop() {
 	   super.onStop();
-	   mp.pause();
+	   //mp.pause();
 	}
 	 
 	@Override
 	protected void onRestart() {
 	   super.onRestart();
-	   mp.start();
+	   //mp.start();
 	}
 	 
 	@Override
 	protected void onDestroy() {
 	   super.onDestroy();
-	   mp.stop();
+	   //mp.stop();
 	}
 	
 	@Override public void onLocationChanged(Location location) {
@@ -213,13 +216,11 @@ public class MainActivity extends ListActivity implements LocationListener {
 	}
 	
 	private void actualizaMejorLocaliz(Location localiz) {
-	       if (mejorLocaliz == null
-	                    || localiz.getAccuracy() < 2*mejorLocaliz.getAccuracy()
-	                    || localiz.getTime() - mejorLocaliz.getTime() > DOS_MINUTOS) {
+	       if (mejorLocaliz == null || localiz.getAccuracy() < 2*mejorLocaliz.getAccuracy() || localiz.getTime() - mejorLocaliz.getTime() > DOS_MINUTOS) {
 	             Log.d(Lugares.TAG, "Nueva mejor localización");
 	             mejorLocaliz = localiz;
-	             Lugares.posicionActual.setLatitud(localiz.getLatitude());
-	             Lugares.posicionActual.setLongitud(localiz.getLongitude());
+	             if (localiz != null) Lugares.posicionActual.setLatitud(localiz.getLatitude());
+	             if (localiz != null) Lugares.posicionActual.setLongitud(localiz.getLongitude());
 	       }
 	}
 }
