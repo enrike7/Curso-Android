@@ -81,6 +81,7 @@ public class EdicionLugar extends Activity {
 		}
 		lugar.setUrl(url.getText().toString());
 		lugar.setComentario(comentario.getText().toString());
+		Lugares.actualizaLugar((int) id, lugar);
 		finish();
 	}
 }

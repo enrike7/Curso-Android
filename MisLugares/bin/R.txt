@@ -78,10 +78,11 @@ int drawable otros 0x7f020027
 int drawable restaurante 0x7f020028
 int id RelativeLayout1 0x7f070006
 int id TextView01 0x7f070005
-int id accion_borrar 0x7f070031
-int id accion_compartir 0x7f07002e
-int id accion_editar 0x7f070030
-int id accion_llegar 0x7f07002f
+int id accion_borrar 0x7f070032
+int id accion_compartir 0x7f07002f
+int id accion_editar 0x7f070031
+int id accion_llegar 0x7f070030
+int id accion_nuevo 0x7f07002e
 int id aceptar 0x7f070026
 int id acercaDe 0x7f070028
 int id cancelar 0x7f070025

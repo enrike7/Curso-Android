@@ -36,7 +36,6 @@ public class VistaLugar extends Activity {
         
         Bundle extras = getIntent().getExtras();
         id = extras.getLong("id", -1);
-        lugar = Lugares.elemento((int) id);
         imageView = (ImageView) findViewById(R.id.foto);
         
         actualizarVistas();
@@ -75,19 +74,20 @@ public class VistaLugar extends Activity {
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-           if (requestCode == RESULTADO_EDITAR) {
-                 actualizarVistas();
-                 findViewById(R.id.scrollView1).invalidate();
-           }
-           else if (requestCode == RESULTADO_GALERIA && resultCode == Activity.RESULT_OK) {
-        	   lugar.setFoto(data.getDataString());
-        	   ponerFoto(imageView, lugar.getFoto());
-           }
-           else if (requestCode == RESULTADO_FOTO && resultCode == Activity.RESULT_OK && lugar != null && uriFoto != null) {
-        	   lugar.setFoto(uriFoto.toString());
-        	   ponerFoto(imageView, lugar.getFoto());
-           }
-
+    	if (requestCode == RESULTADO_EDITAR) {
+    		actualizarVistas();
+    		findViewById(R.id.scrollView1).invalidate();
+    	}
+    	else if (requestCode == RESULTADO_GALERIA && resultCode == Activity.RESULT_OK) {
+    		lugar.setFoto(data.getDataString());
+    		Lugares.actualizaLugar((int) id, lugar);
+    		ponerFoto(imageView, lugar.getFoto());
+    	}
+    	else if (requestCode == RESULTADO_FOTO && resultCode == Activity.RESULT_OK && lugar != null && uriFoto != null) {
+    		lugar.setFoto(uriFoto.toString());
+    		Lugares.actualizaLugar((int) id, lugar);
+    		ponerFoto(imageView, lugar.getFoto());
+    	}
     }
     
     public void confirmarBorrar(View view) {
@@ -104,6 +104,8 @@ public class VistaLugar extends Activity {
     		.show();
     }
     public void actualizarVistas() {
+    	lugar = Lugares.elemento((int) id);
+    	
     	//nombre
     	TextView nombre = (TextView) findViewById(R.id.nombre);
         nombre.setText(lugar.getNombre());
@@ -165,6 +167,7 @@ public class VistaLugar extends Activity {
                 @Override public void onRatingChanged(RatingBar ratingBar,
                                                 float valor, boolean fromUser) {
                     lugar.setValoracion(valor);
+                    Lugares.actualizaLugar((int) id, lugar);
                 }
         });
         
@@ -230,6 +233,7 @@ public class VistaLugar extends Activity {
 			}
 		})
 		.show();
+    	Lugares.actualizaLugar((int) id, lugar);
     }
     
 }

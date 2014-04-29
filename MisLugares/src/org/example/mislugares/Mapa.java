@@ -1,6 +1,7 @@
 package org.example.mislugares;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -15,47 +16,51 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class  Mapa extends FragmentActivity implements OnInfoWindowClickListener {
-private GoogleMap mapa;
+public class Mapa extends FragmentActivity implements OnInfoWindowClickListener {
 
-@Override public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.mapa);
-    mapa = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapa)).getMap();
-    mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-    mapa.setMyLocationEnabled(true);
-    mapa.getUiSettings().setZoomControlsEnabled(true);
-    mapa.getUiSettings().setCompassEnabled(true);
-    if (Lugares.vectorLugares.size() > 0) {
-        GeoPunto p = Lugares.vectorLugares.get(0).getPosicion();
-        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(p.getLatitud(), p.getLongitud()), 12));
-    }
+    private GoogleMap mapa;
 
-    for (Lugar lugar : Lugares.vectorLugares) {
-        GeoPunto p = lugar.getPosicion();
-        if (p != null && p.getLatitud() != 0) {
-            BitmapDrawable iconoDrawable = (BitmapDrawable) getResources().getDrawable(lugar.getTipo().getRecurso());
-            Bitmap iGrande = iconoDrawable.getBitmap();
-            Bitmap icono = Bitmap.createScaledBitmap(iGrande, iGrande.getWidth() / 7, iGrande.getHeight() / 7, false);
-            mapa.addMarker(new MarkerOptions()
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.mapa);
+        mapa = ((SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.mapa)).getMap();
+        mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mapa.setMyLocationEnabled(true);
+        mapa.getUiSettings().setZoomControlsEnabled(true);
+        mapa.getUiSettings().setCompassEnabled(true);   
+
+        boolean primero = true;
+        Cursor c = Lugares.listado();
+        while (c.moveToNext()){
+            GeoPunto p = new GeoPunto(c.getDouble(3), c.getDouble(4));
+            if (p != null && p.getLatitud() != 0) {
+                if (primero){
+                    mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                            new LatLng(p.getLatitud(), p.getLongitud()), 12));
+                    primero = false;
+                }
+                BitmapDrawable iconoDrawable = (BitmapDrawable) getResources()
+                        .getDrawable(TipoLugar.values()[c.getInt(5)].getRecurso());
+                Bitmap iGrande = iconoDrawable.getBitmap();
+                Bitmap icono = Bitmap.createScaledBitmap(iGrande,
+                        iGrande.getWidth() / 7, iGrande.getHeight() / 7, false);
+                mapa.addMarker(new MarkerOptions()
                         .position(new LatLng(p.getLatitud(), p.getLongitud()))
-                        .title(lugar.getNombre()).snippet(lugar.getDireccion())
+                        .title(c.getString(1)).snippet(c.getString(2))
                         .icon(BitmapDescriptorFactory.fromBitmap(icono)));
             }
-        }
-    mapa.setOnInfoWindowClickListener(this);
-	}
+        }       
+        mapa.setOnInfoWindowClickListener(this);
+    }
 
-	@Override
-	public void onInfoWindowClick(Marker marker) {
-		for (int id=0; id<Lugares.vectorLugares.size(); id++){
-	        if (Lugares.vectorLugares.get( id).getNombre().equals(marker.getTitle())){
-	            Intent intent = new Intent(this, VistaLugar.class);
-	            intent.putExtra("id", (long)id);
-	            startActivity(intent);
-	            break;
-	        }
-	    }
-	}
+    @Override public void onInfoWindowClick(Marker marker) {
+        int id = Lugares.buscarNombre(marker.getTitle());
+        if (id!=-1){
+            Intent intent = new Intent(this, VistaLugar.class);
+            intent.putExtra("id", (long) id);
+            startActivity(intent);       
+        }
+    }
 }

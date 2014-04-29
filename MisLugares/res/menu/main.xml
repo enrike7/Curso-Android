@@ -41,5 +41,12 @@
        android:icon="@android:drawable/ic_menu_myplaces"
        android:orderInCategory="100"
        android:showAsAction="always"/>
+	
+	<item
+	   android:id="@+id/accion_nuevo"
+	   android:icon="@android:drawable/ic_menu_add"
+	   android:orderInCategory="80"
+	   android:showAsAction="ifRoom"
+	   android:title="Nuevo"/>
 
 </menu>

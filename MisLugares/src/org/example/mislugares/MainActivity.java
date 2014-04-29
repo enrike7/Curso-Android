@@ -20,7 +20,6 @@ import android.widget.Toast;
 public class MainActivity extends ListActivity implements LocationListener {
 	
 	public BaseAdapter adaptador;
-	private final static int RESULTADO_LIST = 1;
 	private static final long DOS_MINUTOS = 2 * 60 * 1000;
 	//private MediaPlayer mp;
 	private LocationManager manejador;
@@ -31,7 +30,14 @@ public class MainActivity extends ListActivity implements LocationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		adaptador = new AdaptadorLugares(this);
+		//adaptador = new AdaptadorLugares(this);
+		Lugares.indicializaBD(this);
+		//adaptador = new SimpleCursorAdapter(this,
+		//      R.layout.elemento_lista,
+		//     Lugares.listado(),
+		//      new String[] { "nombre", "direccion"},
+		//      new int[] { R.id.nombre, R.id.direccion}, 0);
+		adaptador = new AdaptadorCursorLugares(this, Lugares.listado());
 		setListAdapter(adaptador);
 		//mp = MediaPlayer.create(this, R.raw.audio);
 		//mp.start();
@@ -123,8 +129,14 @@ public class MainActivity extends ListActivity implements LocationListener {
 				break;
 			case R.id.menu_mapa:
 				Intent i = new Intent(this, Mapa.class);
-				startActivity(i);
+				startActivityForResult(i, 0);
 				break;
+			case R.id.accion_nuevo:
+				long id = Lugares.nuevo();
+				Intent intent = new Intent(this, EdicionLugar.class);
+				intent.putExtra("id", id);
+				startActivityForResult(intent, 0);
+				return true;
 			default:
 				
 		}
@@ -136,14 +148,15 @@ public class MainActivity extends ListActivity implements LocationListener {
 		super.onListItemClick(listView, vista, posicion, id);
 		Intent intent = new Intent(this, VistaLugar.class);
 		intent.putExtra("id", id);
-		startActivityForResult(intent, RESULTADO_LIST);
+		startActivityForResult(intent, 0);
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == RESULTADO_LIST) {
-			setListAdapter(adaptador);
-		}
+		super.onActivityResult(requestCode, resultCode, data);
+		   ListView listView = (ListView) findViewById(android.R.id.list);
+		   AdaptadorCursorLugares adaptador =(AdaptadorCursorLugares) listView.getAdapter();
+		   adaptador.changeCursor(Lugares.listado());
 	}
 	
 	private void activarProveedores() { 
